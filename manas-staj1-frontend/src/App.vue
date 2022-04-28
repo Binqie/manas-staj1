@@ -7,6 +7,11 @@
 </template>
 
 <style>
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
 #app {
   min-height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -30,20 +35,12 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #000;
 }
 </style>
 
 <script>
-import MyNavbar from './components/Navbar.vue';
-import MyFooter from './components/Footer.vue';
-import MyContainer from './components/Container.vue';
-
 export default {
-  components: {
-    MyNavbar,
-    MyFooter,
-    MyContainer
-  }
+
 }
 </script>
