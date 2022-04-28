@@ -1,5 +1,10 @@
 <template>
-  <div class="about">
+  <div class="admin">
     <h1>This is an admin page</h1>
   </div>
 </template>
+
+<script>
+export default {
+}
+</script>

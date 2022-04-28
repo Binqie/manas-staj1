@@ -9,15 +9,15 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/admin',
+    name: 'admin',
     component: AdminView
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  history: createWebHistory(process.env.BASE_URL)
 })
 
 export default router
