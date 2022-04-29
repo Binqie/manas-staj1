@@ -13,7 +13,7 @@
                         </li>
                     </ul>
                     <div class="burger-item navbar-cart">
-                        <a href="" class="cart w-40">
+                        <a href="" class="cart w-40" @click.prevent>
                             <img class="cart-img" src="../assets/navbar/cart.svg" alt="">
                         </a>
                     </div>

@@ -1,10 +1,15 @@
 <template>
   <div class="admin">
-    <h1>This is an admin page</h1>
+    <admin-navbar></admin-navbar>
+    <my-container>
+      <router-view/>
+    </my-container>
   </div>
 </template>
 
 <script>
+import AdminNavbar from '../components/AdminNavbar.vue'
 export default {
+  components: { AdminNavbar },
 }
 </script>
