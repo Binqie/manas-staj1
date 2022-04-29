@@ -2,6 +2,13 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+      isCartOpened: false,
+      cartItems: [
+        {name: 'Pizza', price: 120, count: 2},
+        {name: 'Coca-cola 0.5l', price: 100, count: 1},
+        {name: 'Simit', price: 20, count: 3},
+        {name: 'Simit', price: 20, count: 3},
+      ],
       orders: [
         {name: 'Pizza', price: 120, count: 2, customer: 'Argo', date: Date.now(), status: 'ongoing'},
         {name: 'Coca-cola 0.5l', price: 100, count: 1, customer: 'Afa', date: Date.now() + 5987, status: 'done'},
@@ -20,7 +27,22 @@ export default createStore({
   mutations: {
     deleteItem(state, id) {
       state.orders = state.orders.filter(order => order.date !== id);
-    }
+    },
+    switchCartState(state) {
+      state.isCartOpened = !state.isCartOpened;
+    },
+    increaseCount(state, id) {
+      state.cartItems.map((item, index) => {
+        if (index === id) return ++item.count;
+        return item;
+      })  
+    },
+    decreaseCount(state, id) {
+      state.cartItems.map((item, index) => {
+        if (index === id) return --item.count;
+        return item;
+      })
+    },
   },
   actions: {
   },
