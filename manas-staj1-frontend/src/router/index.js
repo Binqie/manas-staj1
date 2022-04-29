@@ -16,12 +16,12 @@ const routes = [
     component: AdminView,
     children: [
       {
-        path: '/admin/orders',
+        path: '/admin/products',
         name: 'products',
         component: ProductsView
       },
       {
-        path: '/admin/products',
+        path: '/admin/orders',
         name: 'orders',
         component: OrdersView     
       },
