@@ -1,6 +1,6 @@
 <template>
     <div class="products">
-        <form>
+        <form class="py-5 px-5">
             <div class="container">
                 <h2>Добавить новый продукт</h2>
                 <div class="row row-cols-2">
@@ -22,8 +22,29 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-light rounded-pill mt-20">Submit</button>
+            <button type="submit" class="btn btn-light rounded-pill mt-4 px-4 py-2">Submit</button>
         </form>
+        <div class="products-list my-5">
+            <h2 class="my-5">Products List</h2>
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, idx) in this.$store.state.productsList" :key="idx">
+                        <th scope="row">{{idx + 1}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.count}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -35,13 +56,13 @@
     form {
         background: #1E2833;
         border-radius: 20px;
-        padding: 65px 125px;
         color: white;
     }
     form h2 {
         margin-bottom: 30px;
     }
-    form input, form textarea {
+    form input,
+    form textarea {
         background-color: #505050;
         opacity: 1;
         border-radius: 20px;
@@ -51,7 +72,7 @@
     }
     form textarea {
         min-height: 100px;
-        overflow: hidden; 
+        overflow: hidden;
     }
     .input {
         display: flex;
