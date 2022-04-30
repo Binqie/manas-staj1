@@ -5,28 +5,29 @@
             <div class="cart-title">
                 <h1>Корзина</h1>
             </div>
-            <div class="cart-items">
+            <div class="cart-item">
                 <div class="card mb-3" style="max-width: 400px;" v-for="(item, idx) in this.$store.state.cartItems" :key="idx">
-                    <div class="row g-0">
+                    <div class="row g-0 d-flex align-items-center">
                         <div class="col-md-3">
                             <img src="../assets/cart/plov.png" class="img-fluid rounded-start" alt="...">
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <div class="card-body">
                                 <h5 class="card-title">{{item.name}}</h5>
                                 <p class="card-text"><small class="text-muted">{{item.price * item.count}} сом</small></p>
                             </div>
                         </div>
-                        <div class="col-md-2 card-count">
-                            <span>{{item.count}}</span>
+                        <div class="col-md-3 card-count">
                             <div class="btn-wrap">
-                                <button class="decrease" @click="decrease(idx)">-</button>
+                                <button class="decrease" @click="decrease(item, idx)">-</button>
+                                    <span style="color: white">{{item.count}}</span>
                                 <button class="increase" @click="increase(idx)">+</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="total-count">{{this.$store.state.cartItems.reduce((acc, item) => acc + item.count * item.price, 0)}} сом</div>
             <button type="button" class="btn btn-light cart-btn" style="border-radius: 20px;">Заказать</button>
         </div>
     </div>
@@ -56,8 +57,8 @@
             increase(idx) {
                 return this.$store.commit('increaseCount', idx)
             },
-            decrease(idx) {
-                if (idx === 0) return;
+            decrease(item, idx) {
+                if (item.count === 1) return;
                 return this.$store.commit('decreaseCount', idx)
             }
         }
@@ -81,16 +82,19 @@
         right: 0;
         width: 500px;
         background-color: #1E2833;
-        opacity: 0.8;
         z-index: 100;
     }
     .cart-title {
         color: white;
     }
-    .cart-items {
+    .cart-item {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
     }
     .close,
     .close::after,
@@ -117,5 +121,26 @@
     .close::before {
         left: -5px;
         transform: rotateZ(45deg);
+    }
+    .btn-wrap {
+        background-color: #3C3C43;
+        height: 32px;
+        width: 80px;
+        padding: 0 1px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .btn-wrap > button {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+
+    }
+    .total-count {
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
     }
 </style>

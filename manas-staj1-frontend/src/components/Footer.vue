@@ -45,6 +45,7 @@
   .footer {
     background: #1E2833;
     color: white;
+    margin-top: 50px;
   }
   .footer-inner {
     padding: 30px 30px 50px;
