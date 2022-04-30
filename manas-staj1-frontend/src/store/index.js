@@ -3,6 +3,20 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
       isCartOpened: false,
+      productsList: [
+        {name: 'Pizza', price: 120, count: 2},
+        {name: 'Coca-cola 0.5l', price: 100, count: 1},
+        {name: 'Simit', price: 20, count: 3},
+        {name: 'Sandwich', price: 60, count: 3},
+        {name: 'Coffee', price: 18, count: 2},
+        {name: 'Coca-cola 0.5', price: 35, count: 1},
+        {name: 'Fanta 0.5', price: 35, count: 3},
+        {name: 'Albeni', price: 20, count: 3},
+        {name: 'Snikers', price: 25, count: 2},
+        {name: 'Pepsi', price: 35, count: 1},
+        {name: 'Legenda', price: 25, count: 3},
+        {name: 'Kit-Kat', price: 25, count: 3},
+      ],
       cartItems: [
         {name: 'Pizza', price: 120, count: 2},
         {name: 'Coca-cola 0.5l', price: 100, count: 1},
