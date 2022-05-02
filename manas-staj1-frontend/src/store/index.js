@@ -57,6 +57,9 @@ export default createStore({
         return item;
       })
     },
+    removeFromCart(state, id) {
+      state.cartItems = state.cartItems.filter((item, index) => index !== id);
+    }
   },
   actions: {
   },

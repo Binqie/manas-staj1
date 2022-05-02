@@ -25,6 +25,7 @@
                             </div>
                         </div>
                     </div>
+                    <div @click="removeFromCart(idx)" class="card-remove"></div>
                 </div>
             </div>
             <div class="total-count">{{this.$store.state.cartItems.reduce((acc, item) => acc + item.count * item.price, 0)}} сом</div>
@@ -60,6 +61,9 @@
             decrease(item, idx) {
                 if (item.count === 1) return;
                 return this.$store.commit('decreaseCount', idx)
+            },
+            removeFromCart(idx) {
+                return this.$store.commit('removeFromCart', idx)
             }
         }
     }
@@ -91,7 +95,28 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
     }
+    .card-remove, .card-remove::after, .card-remove::before {
+        position: absolute;
+        content: '';
+        height: 2px;
+        width: 20px;
+        background-color: #1E2833;
+    }
+    .card-remove {
+        top: 15px;
+        right: 30px;
+        width: 0;
+        height: 0;
+        cursor: pointer;
+    }
+    .card-remove::after {
+        transform: rotateZ(45deg);
+    }
+    .card-remove::before {
+        transform: rotateZ(135deg);
+    } 
     .card {
         border-radius: 15px;
         overflow: hidden;
