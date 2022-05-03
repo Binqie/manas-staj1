@@ -18,10 +18,6 @@ export default createStore({
         {name: 'Kit-Kat', price: 25, count: 3},
       ],
       cartItems: [
-        {name: 'Pizza', price: 120, count: 2},
-        {name: 'Coca-cola 0.5l', price: 100, count: 1},
-        {name: 'Simit', price: 20, count: 3},
-        {name: 'Simit', price: 20, count: 3},
       ],
       orders: [
         {name: 'Pizza', price: 120, count: 2, customer: 'Argo', date: Date.now(), status: 'ongoing'},
@@ -57,6 +53,14 @@ export default createStore({
         return item;
       })
     },
+    addToCart(state, item) {
+      if (state.cartItems.some(el => el.name === item.name)) {
+        state.cartItems.splice(state.cartItems.indexOf(item), 1);
+        return;
+      }
+      item.count = 1;
+      state.cartItems.push(item);
+    }
   },
   actions: {
   },
