@@ -105,7 +105,7 @@
         background-color: #1E2833;
     }
     .card-remove {
-        top: 15px;
+        top: 10px;
         right: 30px;
         width: 0;
         height: 0;

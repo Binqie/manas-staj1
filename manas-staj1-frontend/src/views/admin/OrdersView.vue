@@ -16,7 +16,7 @@
                 <td>{{order.customer}}</td>
                 <td>{{order.date}}</td>
                 <td :class="order.status === 'done' ? 'table-success' : 'table-warning'">{{order.status}}</td>
-                <div @click="deleteItem(order.date)" class="delete">
+                <div @click="deleteItem(order.id)" class="delete">
                     <img src="../../assets/orders/trash.svg" alt="">
                 </div>
             </tr>
@@ -28,11 +28,20 @@
     export default {
         data() {
             return {
+                orders: []
             }
         },
         methods: {
             deleteItem(id) {
-                return this.$store.commit('deleteItem', id)
+                console.log(id)
+                fetch(`http://localhost:3000/deleteOrder/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => this.$store.commit('setOrders', data))
             }
         },
     }

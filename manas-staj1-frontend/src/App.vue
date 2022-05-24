@@ -46,6 +46,11 @@
       return {
       }
     },
+    created() {
+      fetch('http://localhost:3000/url')
+        .then(response => response.json())
+        .then(data => this.$store.commit('setOrders', data))
+    },
     computed: {
       isCartOpened() {
         return this.$store.state.isCartOpened;
