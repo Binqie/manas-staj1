@@ -44,6 +44,15 @@
                     .then(data => this.$store.commit('setOrders', data))
             }
         },
+        created() {
+            fetch(`${this.$store.state.url}/api/admin/orders/index`, {
+                headers: {
+                    'token': localStorage.getItem('token')
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+        }
     }
 </script>
 

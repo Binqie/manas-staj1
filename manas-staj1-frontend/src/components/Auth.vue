@@ -1,5 +1,9 @@
 <template>
-  <div class="auth">
+  <div class="auth" v-show="isAuthOpened">
+    <div class="select-auth">
+      <button class="signIn" @click="choose('signin')">Sign in</button>
+      <button class="logIn" @click="choose('login')">Log in</button>
+    </div>
       <div class="signup" v-show="!this.$store.state.authorised">
         <form>
           <div class="form-group">
@@ -41,9 +45,16 @@ export default {
         number: '',
         password: '',
         name: '',
+        isAuthOpened: true
       }
     },
     methods: {
+      choose(method) {
+        return this.$store.commit('chooseMethod', method)
+      },
+      login(isAdmin) {
+        return this.$store.commit('loggedIn', isAdmin);
+      },
       sendAuth() {
         if (!this.$store.state.authorised) {
           const data = {
@@ -51,7 +62,6 @@ export default {
             student_num: this.number,
             password: this.password
           }
-          console.log(data)
 
           fetch(`${this.$store.state.url}/api/user/register`, {
             method: 'POST',
@@ -61,7 +71,18 @@ export default {
             body: JSON.stringify(data)
           })
             .then(response => response.json())
-            .then(data => localStorage.setItem('token', data.password));
+            .then(data => {
+                if(data.hasOwnProperty('error')) {
+                  alert('This user is already exists!')
+                } else {
+                  localStorage.setItem('token', data.password)
+                  localStorage.setItem('loggedIn', true)
+                  localStorage.setItem('isAdmin', data.is_admin)
+                  this.login(data.is_admin)
+                  this.closeAuth()
+                }
+              }
+            );
 
 
         } else {
@@ -78,8 +99,26 @@ export default {
             body: JSON.stringify(data)
           })
             .then(response => response.json())
-            .then(data => localStorage.setItem('token', data.password))
+            .then(data => {
+              console.log(data)
+              if (data.error === 'error_user') {
+                alert('User not found!')
+              } else if (data.error === 'error_password') {
+                alert('Wrong password!')
+              } else {
+                localStorage.setItem('token', data.password)
+                localStorage.setItem('loggedIn', true)
+                localStorage.setItem('isAdmin', data.is_admin)
+                this.login(data.is_admin)
+                this.closeAuth()
+              }
+            })
         }
+
+
+      },
+      closeAuth() {
+        this.isAuthOpened = false;
       }
     }
 }
@@ -96,6 +135,21 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.select-auth {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+}
+
+.signIn, .logIn {
+  padding: 2px 3px;
+  background-color: #1E2833;
+  border-radius: 5px;
+  margin: 5px;
+  color: white;
 }
 
 .signup, .login {

@@ -11,7 +11,7 @@
                         <li class="nav-item">
                             <router-link to="/">Home</router-link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-show="this.$store.state.isAdmin">
                             <router-link to="/admin">Admin</router-link>
                         </li>
                     </ul>
@@ -46,6 +46,12 @@
 </script>
 
 <style scoped>
+    .navbar {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        /* margin-bottom: 50px; */
+    }
     .navbar-collapse {
         justify-content: space-between;
         align-items: center;
@@ -82,5 +88,8 @@
     }
     .burger-item {
         margin-bottom: 20px;
+    }
+    .navbar-cart {
+        margin-right: 20px;
     }
 </style>

@@ -128,7 +128,6 @@
                     },
                 })
                     .then(response => response.json())
-                    .then(data => console.log(data))
                     .then(data => this.productsList = data)
             },
             addProduct() {
@@ -160,7 +159,11 @@
                 return this.$store.commit('switchModal', id)
             },
             getItem() {
-                fetch(`${this.$store.state.url}/api/admin/products/${this.$store.state.modalId}`)
+                fetch(`${this.$store.state.url}/api/admin/products/${this.$store.state.modalId}`, {
+                    headers: {
+                        'token': localStorage.getItem('token')
+                    }
+                })
                     .then(response => response.json())
                     .then(data => {
                         this.itemName = data.name;
@@ -174,7 +177,8 @@
                 fetch(`${this.$store.state.url}/api/admin/products/${id}`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': localStorage.getItem('token')
                     }
                     
                 })
@@ -193,7 +197,8 @@
                 fetch(`${this.$store.state.url}/api/admin/products/${this.$store.state.modalId}`, {
                     method: 'PATCH',
                     headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'token': localStorage.getItem('token')
                         },
                     body: JSON.stringify(data)
                 })

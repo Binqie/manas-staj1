@@ -66,9 +66,7 @@
                 return this.$store.commit('removeFromCart', idx)
             },
             order() {
-                if (localStorage.getItem('token') == '' || localStorage.getItem('token') == null) {
-                    this.$store.commir('openAuth');
-                }
+                return this.$store.commit('order');
             }
         }
     }
@@ -82,7 +80,7 @@
         left: 0;
         right: 0;
         background-color: rgba(0, 0, 0, 0.2);
-        z-index: 10;
+        z-index: 101;
     }
     .cart {
         position: absolute;
@@ -92,6 +90,8 @@
         width: 500px;
         background-color: #1E2833;
         z-index: 100;
+        overflow-y: scroll;
+        padding: 10px 0 30px;
     }
     .cart-title {
         color: white;
