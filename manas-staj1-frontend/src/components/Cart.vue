@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="total-count">{{this.$store.state.cartItems.reduce((acc, item) => acc + item.count * item.price, 0)}} сом</div>
-            <button type="button" class="btn btn-light cart-btn" style="border-radius: 20px;">Заказать</button>
+            <button type="button" class="btn btn-light cart-btn" style="border-radius: 20px;" @click="order">Заказать</button>
         </div>
     </div>
 </template>
@@ -64,6 +64,11 @@
             },
             removeFromCart(idx) {
                 return this.$store.commit('removeFromCart', idx)
+            },
+            order() {
+                if (localStorage.getItem('token') == '' || localStorage.getItem('token') == null) {
+                    this.$store.commir('openAuth');
+                }
             }
         }
     }

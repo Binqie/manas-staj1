@@ -2,7 +2,8 @@
   <div class="app__inner">
     <my-navbar></my-navbar>
     <my-container>
-      <router-view/>
+      <router-view v-show="true"/>
+      <my-auth v-show="this.$store.state.authWindowOpened"></my-auth>
     </my-container>
     <my-footer></my-footer>
   </div>
@@ -46,11 +47,11 @@
       return {
       }
     },
-    created() {
-      fetch('http://localhost:3000/url')
-        .then(response => response.json())
-        .then(data => this.$store.commit('setOrders', data))
-    },
+    // created() {
+    //   fetch('http://localhost:3000/url')
+    //     .then(response => response.json())
+    //     .then(data => this.$store.commit('setOrders', data))
+    // },
     computed: {
       isCartOpened() {
         return this.$store.state.isCartOpened;

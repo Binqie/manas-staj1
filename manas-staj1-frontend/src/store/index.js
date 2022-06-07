@@ -2,6 +2,13 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+      modalId: 1,
+      isAdmin: true,
+      authorised: true,
+      loggedIn: false,
+      authWindowOpened: false,
+      url: 'https://ac62-178-217-174-2.in.ngrok.io',
+      isModalOpened: false,
       isCartOpened: false,
       productsList: [],
       cartItems: [
@@ -15,6 +22,15 @@ export default createStore({
   getters: {
   },
   mutations: {
+    openAuth(state) {
+      state.authWindowOpened = true;
+    },
+    closeAuth(state) {
+      state.authWindowOpened = false;
+    },
+    setProducts(state, data) {
+      state.productsList = data;
+    },
     setOrders(state, data) {
       state.orders = data;
     },
@@ -39,6 +55,10 @@ export default createStore({
     },
     removeFromCart(state, id) {
       state.cartItems = state.cartItems.filter((item, index) => index !== id);
+    },
+    switchModal(state, id) {
+      state.modalId = id;
+      state.isModalOpened = !state.isModalOpened;
     }
   },
   actions: {

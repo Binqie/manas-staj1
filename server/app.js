@@ -19,6 +19,7 @@ let orders = [
     {id: 7,name: 'Simit', price: 20, count: 3, customer: 'Nurs', date: Date.now() + 13422, status: 'done'},
     {id: 8,name: 'Kahve', price: 18, count: 1, customer: 'Meerim', date: Date.now() + 12332, status: 'ongoing'},
     {id: 9,name: 'Puding', price: 25, count: 1, customer: 'Kanykei', date: Date.now() + 13465, status: 'done'},
+    {id: 9,name: 'Puding', price: 25, count: 1, customer: 'Kanykei', date: Date.now() + 13465, status: 'done'},
 ]
 
 let productList = [
@@ -33,6 +34,7 @@ let productList = [
     {name: 'Snikers', price: 25, count: 2, img: 'img', description: 'abc'},
     {name: 'Pepsi', price: 35, count: 1, img: 'img', description: 'abc'},
     {name: 'Legenda', price: 25, count: 3, img: 'img', description: 'abc'},
+    {name: 'Kit-Kat', price: 25, count: 3, img: 'img', description: 'abc'},
     {name: 'Kit-Kat', price: 25, count: 3, img: 'img', description: 'abc'},
 ]
 

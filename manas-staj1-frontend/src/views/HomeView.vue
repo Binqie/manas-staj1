@@ -32,8 +32,9 @@
           <div>
             <a id="mark" class="text-warning">{{this.popularProducts[this.currentPage-1].price}}</a>
             <button id="addToBucket" class="btn btn-info"><svg width="23" height="23" viewBox="0 0 46 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M44.9463 6.15069C44.8048 5.98527 44.5975 5.89011 44.3793 5.89011H9.11479L7.67686 1.07112C7.5817 0.754241 7.29073 0.537506 6.96039 0.537506H1.44536C1.03232 0.537506 0.697998 0.871826 0.697998 1.28487C0.697998 1.69791 1.03232 2.03223 1.44536 2.03223H6.40336L15.4883 32.4768C15.4893 32.4802 15.4923 32.4832 15.4933 32.4867L16.6218 36.3252C15.9093 37.0332 15.4679 38.0132 15.4679 39.0939C15.4679 41.2513 17.2222 43.0066 19.3781 43.0066C21.4647 43.0066 23.1692 41.3584 23.2743 39.2942H33.0692C33.0687 39.3216 33.0652 39.3485 33.0652 39.3764C33.0652 41.5318 34.8186 43.2856 36.9734 43.2856C39.1283 43.2856 40.8821 41.5318 40.8821 39.3764C40.8821 37.221 39.1283 35.4672 36.9734 35.4672C35.3796 35.4672 34.0079 36.4278 33.4006 37.7995H23.0611C22.8697 37.2539 22.5613 36.7522 22.1403 36.3312C21.4024 35.5933 20.4219 35.1862 19.3796 35.1862C19.3791 35.1862 19.3786 35.1862 19.3786 35.1862C18.8659 35.1862 18.3771 35.2878 17.9282 35.4682L17.2057 33.0104H40.4601C40.8293 33.0104 41.1432 32.7408 41.1985 32.3761L45.1182 6.75008C45.1511 6.53484 45.0883 6.31611 44.9463 6.15069ZM36.9734 36.9624C38.3042 36.9624 39.3874 38.0456 39.3874 39.3769C39.3874 40.7082 38.3042 41.7914 36.9734 41.7914C35.6426 41.7914 34.56 40.7082 34.56 39.3769C34.56 38.0456 35.6426 36.9624 36.9734 36.9624ZM19.3786 36.6814H19.3791C20.0223 36.6814 20.6271 36.9325 21.0825 37.3884C21.5384 37.8443 21.789 38.4507 21.789 39.0949C21.789 40.4282 20.7074 41.5129 19.3776 41.5129C18.0458 41.5129 16.9621 40.4282 16.9621 39.0949C16.9626 37.7641 18.0463 36.6814 19.3786 36.6814ZM39.8179 31.5162H16.7658L15.3528 26.7091C15.3348 26.6483 15.3079 26.593 15.277 26.5407L9.56071 7.38483H43.5089L39.8179 31.5162Z" fill="black"/>
-  </svg></button>
+              <path d="M44.9463 6.15069C44.8048 5.98527 44.5975 5.89011 44.3793 5.89011H9.11479L7.67686 1.07112C7.5817 0.754241 7.29073 0.537506 6.96039 0.537506H1.44536C1.03232 0.537506 0.697998 0.871826 0.697998 1.28487C0.697998 1.69791 1.03232 2.03223 1.44536 2.03223H6.40336L15.4883 32.4768C15.4893 32.4802 15.4923 32.4832 15.4933 32.4867L16.6218 36.3252C15.9093 37.0332 15.4679 38.0132 15.4679 39.0939C15.4679 41.2513 17.2222 43.0066 19.3781 43.0066C21.4647 43.0066 23.1692 41.3584 23.2743 39.2942H33.0692C33.0687 39.3216 33.0652 39.3485 33.0652 39.3764C33.0652 41.5318 34.8186 43.2856 36.9734 43.2856C39.1283 43.2856 40.8821 41.5318 40.8821 39.3764C40.8821 37.221 39.1283 35.4672 36.9734 35.4672C35.3796 35.4672 34.0079 36.4278 33.4006 37.7995H23.0611C22.8697 37.2539 22.5613 36.7522 22.1403 36.3312C21.4024 35.5933 20.4219 35.1862 19.3796 35.1862C19.3791 35.1862 19.3786 35.1862 19.3786 35.1862C18.8659 35.1862 18.3771 35.2878 17.9282 35.4682L17.2057 33.0104H40.4601C40.8293 33.0104 41.1432 32.7408 41.1985 32.3761L45.1182 6.75008C45.1511 6.53484 45.0883 6.31611 44.9463 6.15069ZM36.9734 36.9624C38.3042 36.9624 39.3874 38.0456 39.3874 39.3769C39.3874 40.7082 38.3042 41.7914 36.9734 41.7914C35.6426 41.7914 34.56 40.7082 34.56 39.3769C34.56 38.0456 35.6426 36.9624 36.9734 36.9624ZM19.3786 36.6814H19.3791C20.0223 36.6814 20.6271 36.9325 21.0825 37.3884C21.5384 37.8443 21.789 38.4507 21.789 39.0949C21.789 40.4282 20.7074 41.5129 19.3776 41.5129C18.0458 41.5129 16.9621 40.4282 16.9621 39.0949C16.9626 37.7641 18.0463 36.6814 19.3786 36.6814ZM39.8179 31.5162H16.7658L15.3528 26.7091C15.3348 26.6483 15.3079 26.593 15.277 26.5407L9.56071 7.38483H43.5089L39.8179 31.5162Z" fill="black"/>
+              </svg>
+            </button>
           </div>
           <div class="product_footer">
             <h4 id="product_title">Select Quantity</h4>
@@ -93,34 +94,35 @@
 </template>
 
 <script>
+
   export default {
     data() {
       return {
         currentPage: 1,
-        allProducts: this.$store.state.productsList,
+        allProducts: [],
         popularProducts: this.$store.state.productsList.filter((item, id) => id < 5),
         searchWord: "",
-        selected: "Все"
+        selected: "Все",
       }
     },
     created() {
       this.allProducts = this.$store.state.productsList;
-      // fetch('https://localhost:5001/Product/TopFiveProducts')
-      //   .then(data => {
-      //     return data.json();
-      //   })
-      //   .then(post => {
-      //     this.popularProducts = post
-      //     console.log(this.popularProducts)
-      //   });
-      // fetch('https://localhost:5001/Product/AllProducts')
-      //   .then(data => {
-      //     return data.json();
-      //   })
-      //   .then(post => {
-      //     this.allProducts = post
-      //     console.log(this.allProducts)
-      //   });
+      fetch(`${this.$store.state.url}/api/top/five`)
+        .then(data => {
+          return data.json();
+        })
+        .then(post => {
+          this.popularProducts = post
+          console.log(this.popularProducts)
+        });
+      fetch(`${this.$store.state.url}/api/products`)
+        .then(data => {
+          return data.json();
+        })
+        .then(post => {
+          this.allProducts = post
+          console.log(this.allProducts)
+        });
     },
     methods: {
       increase(idx) {
@@ -131,9 +133,6 @@
         return this.$store.commit('decreaseCount', idx)
       },
       async search() {
-        if (this.searchWord == "") {
-          return
-        }
         let categoryId;
         if (this.selected == "Все") {
           categoryId = 1;
@@ -142,21 +141,21 @@
           categoryId = this.selected
           console.log(categoryId)
         }
-        fetch(
-          `https://localhost:5001/Product`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              name: this.searchWord,
-              categoryId: categoryId
+        fetch(`${this.$store.state.url}/api/search`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: this.searchWord,
+            categoryId: categoryId
             })
-          }
-        ).then(res => res.json()).then(res => {
-          this.allProducts = res
-          console.log(this.allProducts)
         })
+          .then(res => res.json())
+          .then(res => {
+            this.allProducts = res
+            console.log(this.allProducts)
+          })
       },
       changePage(n) {
         this.currentPage = n

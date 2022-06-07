@@ -13,5 +13,9 @@
     components: {
       AdminNavbar
     },
+    
   }
 </script>
+
+<style scoped>
+</style>
