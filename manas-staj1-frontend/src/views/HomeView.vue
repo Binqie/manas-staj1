@@ -123,6 +123,7 @@
           return data.json();
         })
         .then(post => {
+          console.log(post)
           this.allProducts = post
         });
     },

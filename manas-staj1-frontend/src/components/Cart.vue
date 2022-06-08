@@ -39,6 +39,7 @@
         name: 'my-cart',
         data() {
             return {
+                totalPrice: 0,
                 variant: 'dark',
                 variants: [
                     'transparent',
@@ -66,7 +67,7 @@
                 return this.$store.commit('removeFromCart', idx)
             },
             order() {
-                return this.$store.commit('order');
+                return this.$store.commit('order', this.$store.state.cartItems.reduce((acc, item) => acc + item.count * item.price, 0));
             }
         }
     }

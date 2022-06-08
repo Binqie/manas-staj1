@@ -8,7 +8,7 @@ export default createStore({
       authorised: false,
       loggedIn: localStorage.getItem('loggedIn') != null,
       authWindowOpened: false,
-      url: 'https://52a2-212-42-96-202.eu.ngrok.io',
+      url: 'https://4fa4-178-217-174-2.in.ngrok.io',
       isModalOpened: false,
       isCartOpened: false,
       productsList: [],
@@ -18,7 +18,7 @@ export default createStore({
   getters: {
   },
   mutations: {
-    order(state) {
+    order(state, totalPrice) {
 
       const orders = state.cartItems.map(item => {
         let newItem = {};
@@ -34,7 +34,7 @@ export default createStore({
           'Content-Type': 'application/json',
           'token': localStorage.getItem('token')
         },
-        body: JSON.stringify({orders: orders})
+        body: JSON.stringify({orders: orders, price: totalPrice})
       })
         .then(response => response.json())
         .then(data => {

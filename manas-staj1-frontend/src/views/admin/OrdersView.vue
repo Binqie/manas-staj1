@@ -1,27 +1,20 @@
 <template>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Order</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(order, idx) in this.$store.state.orders" :key="order.name">
-                <th scope="row">{{idx + 1}}</th>
-                <td>{{order.name}} x{{order.count}}</td>
-                <td>{{order.customer}}</td>
-                <td>{{order.date}}</td>
-                <td :class="order.status === 'done' ? 'table-success' : 'table-warning'">{{order.status}}</td>
-                <div @click="deleteItem(order.id)" class="delete">
-                    <img src="../../assets/orders/trash.svg" alt="">
+    <div class="orders">
+        <div class="user" v-for="user of orders" :key="user.user_id">
+            <h3>Customer: {{user.user_name}}</h3>
+            <div class="card-wrapper">
+                <div class="card" style="width: 18rem;" v-for="(order, idx) in user.orders" :key="idx">
+                    <div class="card-body">
+                        <h5 class="card-title">{{order.name}}</h5>
+                        <p class="card-text">count: {{order.count}}</p>
+                    </div>
                 </div>
-            </tr>
-        </tbody>
-    </table>
+            </div>
+            <h3>Price: {{user.price}}</h3>
+            <a href="#" class="btn btn-primary" @click="deleteItem(user.group_id)">Delete</a>
+            <hr>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -34,10 +27,11 @@
         methods: {
             deleteItem(id) {
                 console.log(id)
-                fetch(`http://localhost:3000/deleteOrder/${id}`, {
+                fetch(`${this.$store.state.url}/api/admin/deleteOrder/${id}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': localStorage.getItem('token') 
                     },
                 })
                     .then(response => response.json())
@@ -51,7 +45,10 @@
                 }
             })
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+                this.orders = data
+                console.log(this.orders)
+            })
         }
     }
 </script>
@@ -59,5 +56,19 @@
 <style scoped>
     .delete {
         cursor: pointer;
+    }
+    .user { 
+        margin-top: 30px;
+    }
+    .user > a {
+        margin: 5px;
+    }
+    .card-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        grid-gap: 15px;
+        padding: 20px;
     }
 </style>
