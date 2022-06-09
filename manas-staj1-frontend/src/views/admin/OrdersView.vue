@@ -11,6 +11,7 @@
                 </div>
             </div>
             <h3>Price: {{user.price}}</h3>
+            <a href="#" class="btn btn-primary btn-done" :class="{ 'btn-danger': user.status === 'ready'}" @click="doneOrder(user.group_id)">Done</a>
             <a href="#" class="btn btn-primary" @click="deleteItem(user.group_id)">Delete</a>
             <hr>
         </div>
@@ -27,15 +28,35 @@
         methods: {
             deleteItem(id) {
                 console.log(id)
-                fetch(`${this.$store.state.url}/api/admin/deleteOrder/${id}`, {
-                    method: 'POST',
+                fetch(`${this.$store.state.url}/api/admin/orders/${id}`, {
+                    method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                         'token': localStorage.getItem('token') 
                     },
                 })
                     .then(response => response.json())
-                    .then(data => this.$store.commit('setOrders', data))
+                    .then(data => {
+                        console.log(data)
+                        this.$store.commit('setOrders', data)
+                        this.orders = data
+                    })
+            },
+            doneOrder(id) {
+                console.log(id)
+                fetch(`${this.$store.state.url}/api/admin/orders/status/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': localStorage.getItem('token') 
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        this.$store.commit('setOrders', data)
+                    })
+                
             }
         },
         created() {

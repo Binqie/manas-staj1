@@ -21,7 +21,7 @@
           <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <div class="trend_foods">
+    <div v-if="this.allProducts.length" class="trend_foods">
       <h1>Today's Trending Food</h1>
       <div class="trend_product">
         <div class="tp_img">
@@ -126,6 +126,10 @@
           console.log(post)
           this.allProducts = post
         });
+
+        // setInterval(() => {
+        //   fetch(`${this.$store.state.url}/api/status/order`)
+        // }, 5000)
     },
     methods: {
       addToCart(item) {

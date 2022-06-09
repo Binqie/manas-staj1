@@ -58,7 +58,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="modal-wrapper" v-if="this.$store.state.isModalOpened">
+        <div class="modal-wrapper" v-if="this.$store.state.isEditModalOpened">
             <div class="modal">
                 <div class="modal-close" @click="switchModal">
                     <img src="../../assets/close.png" alt="">
@@ -87,7 +87,7 @@
                                 <option value="4">Напитки</option>
                             </select>
                     </div>
-                    <button type="submit" @click.prevent="save">Save</button>
+                    <button class="save" type="submit" @click.prevent="save">Save</button>
                 </form>
             </div>
         </div>
@@ -137,7 +137,8 @@
                 fetch(`${this.$store.state.url}/api/admin/products`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'token': localStorage.getItem('token')
                     },
                     body: JSON.stringify(data)
                     
@@ -156,7 +157,7 @@
                 this.getItem();
             },
             switchModal(id) {
-                return this.$store.commit('switchModal', id)
+                return this.$store.commit('switchEditModal', id)
             },
             getItem() {
                 fetch(`${this.$store.state.url}/api/admin/products/${this.$store.state.modalId}`, {
@@ -221,6 +222,12 @@
 </script>
 
 <style scoped>
+    .edit, .del, .save {
+        padding: 5px 10px;
+        border-radius: 15px;
+        background-color: #505050;
+        color: white;
+    }
     .type {
         display: flex;
         align-items: center;

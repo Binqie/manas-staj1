@@ -8,9 +8,10 @@ export default createStore({
       authorised: false,
       loggedIn: localStorage.getItem('loggedIn') != null,
       authWindowOpened: false,
-      url: 'https://4fa4-178-217-174-2.in.ngrok.io',
-      isModalOpened: false,
+      url: 'https://eda2-178-217-174-2.in.ngrok.io',
+      isEditModalOpened: false,
       isCartOpened: false,
+      isModalOpened: false,
       productsList: [],
       cartItems: [],
       orders: []
@@ -19,6 +20,7 @@ export default createStore({
   },
   mutations: {
     order(state, totalPrice) {
+      if (state.cartItems.length < 1) return;
 
       const orders = state.cartItems.map(item => {
         let newItem = {};
@@ -38,6 +40,10 @@ export default createStore({
       })
         .then(response => response.json())
         .then(data => {
+          if (data.message === 'not enough quantity') {
+            alert(`${data.product_name}: недостаточно количества.`)
+            return
+          }
           state.cartItems = [];
           state.orders = data;
           console.log(data)
@@ -77,6 +83,9 @@ export default createStore({
     switchCartState(state) {
       state.isCartOpened = !state.isCartOpened;
     },
+    switchModalState(state) {
+      state.isModalOpened = !state.isModalOpened;
+    },
     increaseCount(state, id) {
       state.cartItems.map((item, index) => {
         if (index === id) return ++item.count;
@@ -92,9 +101,9 @@ export default createStore({
     removeFromCart(state, id) {
       state.cartItems = state.cartItems.filter((item, index) => index !== id);
     },
-    switchModal(state, id) {
+    switchEditModal(state, id) {
       state.modalId = id;
-      state.isModalOpened = !state.isModalOpened;
+      state.isEditModalOpened = !state.isEditModalOpened;
     },
     addToCart(state, item) {
       item.count = 1;
