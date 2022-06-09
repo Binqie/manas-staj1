@@ -2,48 +2,89 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+      hasToken: localStorage.getItem('token') !== null ? true : false,
+      modalId: 1,
+      isAdmin: localStorage.getItem('isAdmin') == 'true',
+      authorised: false,
+      loggedIn: localStorage.getItem('loggedIn') != null,
+      authWindowOpened: false,
+      url: 'https://eda2-178-217-174-2.in.ngrok.io',
+      isEditModalOpened: false,
       isCartOpened: false,
-      productsList: [
-        {name: 'Pizza', price: 120, count: 2},
-        {name: 'Coca-cola 0.5l', price: 100, count: 1},
-        {name: 'Simit', price: 20, count: 3},
-        {name: 'Sandwich', price: 60, count: 3},
-        {name: 'Coffee', price: 18, count: 2},
-        {name: 'Coca-cola 0.5', price: 35, count: 1},
-        {name: 'Fanta 0.5', price: 35, count: 3},
-        {name: 'Albeni', price: 20, count: 3},
-        {name: 'Snikers', price: 25, count: 2},
-        {name: 'Pepsi', price: 35, count: 1},
-        {name: 'Legenda', price: 25, count: 3},
-        {name: 'Kit-Kat', price: 25, count: 3},
-      ],
-      cartItems: [
-        {name: 'Pizza', price: 120, count: 2},
-        {name: 'Coca-cola 0.5l', price: 100, count: 1},
-        {name: 'Simit', price: 20, count: 3},
-        {name: 'Simit', price: 20, count: 3},
-      ],
-      orders: [
-        {name: 'Pizza', price: 120, count: 2, customer: 'Argo', date: Date.now(), status: 'ongoing'},
-        {name: 'Coca-cola 0.5l', price: 100, count: 1, customer: 'Afa', date: Date.now() + 5987, status: 'done'},
-        {name: 'Simit', price: 20, count: 3, customer: 'Nurs', date: Date.now() + 13421, status: 'ongoing'},
-        {name: 'Kahve', price: 18, count: 1, customer: 'Meerim', date: Date.now() + 12345, status: 'done'},
-        {name: 'Puding', price: 25, count: 1, customer: 'Kanykei', date: Date.now() + 13478, status: 'ongoing'},
-        {name: 'Pizza', price: 120, count: 2, customer: 'Argo', date: Date.now() + 2344, status: 'ongoing'},
-        {name: 'Coca-cola 0.5l', price: 100, count: 1, customer: 'Afa', date: Date.now() + 5983, status: 'done'},
-        {name: 'Simit', price: 20, count: 3, customer: 'Nurs', date: Date.now() + 13422, status: 'done'},
-        {name: 'Kahve', price: 18, count: 1, customer: 'Meerim', date: Date.now() + 12332, status: 'ongoing'},
-        {name: 'Puding', price: 25, count: 1, customer: 'Kanykei', date: Date.now() + 13465, status: 'done'},
-      ]
+      isModalOpened: false,
+      productsList: [],
+      cartItems: [],
+      orders: []
   },
   getters: {
   },
   mutations: {
+    order(state, totalPrice) {
+      if (state.cartItems.length < 1) return;
+
+      const orders = state.cartItems.map(item => {
+        let newItem = {};
+        newItem.product_id = item.id;
+        newItem.count = item.count;
+        return newItem;
+      })
+
+
+      fetch(`${state.url}/api/order`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'token': localStorage.getItem('token')
+        },
+        body: JSON.stringify({orders: orders, price: totalPrice})
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.message === 'not enough quantity') {
+            alert(`${data.product_name}: недостаточно количества.`)
+            return
+          }
+          state.cartItems = [];
+          state.orders = data;
+          console.log(data)
+        })
+    },
+    chooseMethod(state, method) {
+      if (method === 'signin') {
+        state.authorised = false;
+      } else {
+        state.authorised = true;
+      }
+    },
+    loggedIn(state, isAdmin) {
+      state.authWindowOpened = false;
+      state.loggedIn = true;
+      state.authorised = true;
+      if (isAdmin) {
+        state.isAdmin = true;
+      }
+    },
+    openAuth(state) {
+      state.authWindowOpened = true;
+    },
+    closeAuth(state) {
+      state.authWindowOpened = false;
+    },
+    setProducts(state, data) {
+      state.productsList = data;
+    },
+    setOrders(state, data) {
+      state.orders = data;
+    },
     deleteItem(state, id) {
       state.orders = state.orders.filter(order => order.date !== id);
+
     },
     switchCartState(state) {
       state.isCartOpened = !state.isCartOpened;
+    },
+    switchModalState(state) {
+      state.isModalOpened = !state.isModalOpened;
     },
     increaseCount(state, id) {
       state.cartItems.map((item, index) => {
@@ -57,6 +98,17 @@ export default createStore({
         return item;
       })
     },
+    removeFromCart(state, id) {
+      state.cartItems = state.cartItems.filter((item, index) => index !== id);
+    },
+    switchEditModal(state, id) {
+      state.modalId = id;
+      state.isEditModalOpened = !state.isEditModalOpened;
+    },
+    addToCart(state, item) {
+      item.count = 1;
+      state.cartItems = [...state.cartItems, item];
+    }
   },
   actions: {
   },

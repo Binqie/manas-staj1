@@ -13,5 +13,12 @@
     components: {
       AdminNavbar
     },
+    
   }
 </script>
+
+<style scoped>
+.admin {
+  margin-top: 100px;
+}
+</style>

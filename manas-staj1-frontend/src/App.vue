@@ -2,7 +2,8 @@
   <div class="app__inner">
     <my-navbar></my-navbar>
     <my-container>
-      <router-view/>
+      <router-view v-show="this.$store.state.loggedIn"/>
+      <my-auth v-show="!this.$store.state.hasToken || this.$store.state.authWindowOpened"></my-auth>
     </my-container>
     <my-footer></my-footer>
   </div>
